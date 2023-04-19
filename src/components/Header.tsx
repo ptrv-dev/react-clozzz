@@ -28,6 +28,7 @@ const Header: React.FC = () => {
   dispatch(setScroll(isActive));
 
   const handleMenuClick = () => setActive((prev) => !prev);
+  const handleCloseMenu = () => setActive(false);
 
   if (width < 1024)
     return (
@@ -133,15 +134,16 @@ const Header: React.FC = () => {
           </div>
         </header>
         <div
-          className={`fixed z-10 top-0 left-0 w-full h-full bg-black bg-opacity-25 ${
+          className={`fixed z-40 top-0 left-0 w-full h-full bg-black bg-opacity-25 ${
             isActive ? '' : 'hidden'
           }`}
+          onClick={handleCloseMenu}
         ></div>
       </>
     );
 
   return (
-    <header className="fixed top-0 left-0 z-50 w-full pt-6">
+    <header className="fixed top-0 left-0 z-50 w-full py-6 bg-white">
       <div className="container flex items-center justify-between">
         <nav className="pl-16">
           <ul className="flex items-center gap-8 text-lg">

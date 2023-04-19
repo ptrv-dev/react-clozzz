@@ -16,7 +16,7 @@ const App: React.FC = () => {
   return (
     <>
       <Header />
-      <main className="flex-1">
+      <main className="flex-1 mt-[84px] sm:mt-[108px]">
         <Routes>
           <Route index element={<HomePage />} />
         </Routes>
