@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import useWindowSize from '../hooks/useWindowSize';
+
+import { setScroll } from '../store/slices/body.slice';
+import { useAppDispatch } from '../store';
 
 const Logo: React.FC = () => {
   return (
@@ -15,10 +19,13 @@ const Logo: React.FC = () => {
 };
 
 const Header: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [width, height] = useWindowSize();
 
   const headerRef = React.useRef<HTMLElement>(null);
   const [isActive, setActive] = React.useState<boolean>(false);
+
+  dispatch(setScroll(isActive));
 
   const handleMenuClick = () => setActive((prev) => !prev);
 
