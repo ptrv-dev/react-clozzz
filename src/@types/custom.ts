@@ -4,3 +4,10 @@ export interface IBrand {
   url: string;
   image: string;
 }
+
+export interface INews {
+  _id: number;
+  image: string;
+  title: string;
+  createdAt: Date;
+}
