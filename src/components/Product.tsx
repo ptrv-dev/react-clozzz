@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import useWindowSize from '../hooks/useWindowSize';
 
-const Product: React.FC = () => {
+import { IProduct } from '../@types/custom';
+
+type ProductProps = Pick<IProduct, 'title' | 'images' | 'price'>;
+
+const Product: React.FC<ProductProps> = ({ title, images, price }) => {
   const [width] = useWindowSize();
   const imagesRef = React.useRef<HTMLDivElement>(null);
-  let price = 397.99;
 
   React.useEffect(() => {
     if (!imagesRef.current) return;
@@ -22,19 +26,19 @@ const Product: React.FC = () => {
         className="relative h-[280px] rounded-lg overflow-hidden"
       >
         <img
-          src="/img/products/1/2.webp"
-          alt=""
-          className="object-cover absolute z-20 group-hover:opacity-0 transition-opacity h-full w-full"
-        />
-        <img
-          src="/img/products/1/3.webp"
+          src={`/img/products${images[0]}`}
           alt=""
           className="object-cover absolute z-10 h-full w-full"
         />
+        {images.length > 2 && (
+          <img
+            src={`/img/products/${images[1]}`}
+            alt=""
+            className="object-cover absolute z-20 h-full w-full transition-opacity opacity-0 group-hover:opacity-100"
+          />
+        )}
       </div>
-      <h5 className="text-xl font-medium mt-4 mb-2">
-        Celine Tracksuit (Both Top and Bottom)
-      </h5>
+      <h5 className="text-xl font-medium mt-4 mb-2">{title}</h5>
       <p className="text-lg text-zinc-800">
         {price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
       </p>
