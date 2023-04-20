@@ -2,58 +2,30 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { IBrand } from '../@types/custom';
 import Brand from './Brand';
+import axios from 'axios';
+import BrandSkeleton from './BrandSkeleton';
 
 const BrandsSection: React.FC = () => {
-  const [brands, setBrands] = React.useState<IBrand[]>([
-    {
-      _id: 1,
-      title: 'Louis Vuitton',
-      url: 'louis-vuitton',
-      image: 'louis-vuitton.svg',
-    },
-    {
-      _id: 2,
-      title: 'CELINE',
-      url: 'celine',
-      image: 'celine.svg',
-    },
-    {
-      _id: 3,
-      title: 'Balenciaga',
-      url: 'balenciaga',
-      image: 'balenciaga.svg',
-    },
-    {
-      _id: 4,
-      title: 'Moncler',
-      url: 'moncler',
-      image: 'moncler.svg',
-    },
-    {
-      _id: 5,
-      title: 'Nike',
-      url: 'nike',
-      image: 'nike.svg',
-    },
-    {
-      _id: 6,
-      title: 'Air Jordan',
-      url: 'air-jordan',
-      image: 'air-jordan.svg',
-    },
-    {
-      _id: 7,
-      title: 'Rick Owens',
-      url: 'rick-owens',
-      image: 'rick-owens.svg',
-    },
-    {
-      _id: 8,
-      title: 'VETEMENTS',
-      url: 'vetements',
-      image: 'vetements.svg',
-    },
-  ]);
+  const [brands, setBrands] = React.useState<IBrand[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(true);
+
+  const fetchBrands = async () => {
+    try {
+      const { data } = await axios.get<IBrand[]>(
+        `https://643e569dc72fda4a0bf388cf.mockapi.io/brands?page=1&limit=8`
+      );
+      setBrands(data);
+      setLoading(false);
+    } catch (error) {
+      setBrands([]);
+      console.error(error);
+      alert('Fetch brands error!');
+    }
+  };
+
+  React.useEffect(() => {
+    fetchBrands();
+  }, []);
 
   return (
     <section>
@@ -83,9 +55,9 @@ const BrandsSection: React.FC = () => {
           </Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6 gap-5">
-          {brands.map((brand) => (
-            <Brand key={brand._id} {...brand} />
-          ))}
+          {loading
+            ? [...Array(8)].map((_, idx) => <BrandSkeleton key={idx} />)
+            : brands.map((brand) => <Brand key={brand._id} {...brand} />)}
         </div>
       </div>
     </section>
