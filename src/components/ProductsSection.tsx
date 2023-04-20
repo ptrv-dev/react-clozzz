@@ -1,34 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-
-import Product from './Product';
-import ProductSkeleton from './ProductSkeleton';
-
-import { IProduct } from '../@types/custom';
+import ProductsGrid from './ProductsGrid';
 
 const ProductsSection: React.FC = () => {
-  const [products, setProducts] = React.useState<IProduct[]>([]);
-  const [loading, setLoading] = React.useState<boolean>(true);
-
-  const fetchProducts = async () => {
-    try {
-      const { data } = await axios.get<IProduct[]>(
-        `https://643e569dc72fda4a0bf388cf.mockapi.io/products?page=1&limit=8&sortBy=rating&order=desc`
-      );
-      setProducts(data);
-      setLoading(false);
-    } catch (error) {
-      setProducts([]);
-      console.error(error);
-      alert('Product fetch error!');
-    }
-  };
-
-  React.useEffect(() => {
-    fetchProducts();
-  }, []);
-
   return (
     <section>
       <div className="container">
@@ -56,13 +30,7 @@ const ProductsSection: React.FC = () => {
             </svg>
           </Link>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mt-6 gap-5">
-          {loading
-            ? [...Array(8)].map((_, idx) => <ProductSkeleton key={idx} />)
-            : products.map((product) => (
-                <Product key={product._id} {...product} />
-              ))}
-        </div>
+        <ProductsGrid limit={8} sortBy="rating" />
       </div>
     </section>
   );
