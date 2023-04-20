@@ -5,9 +5,9 @@ import useWindowSize from '../hooks/useWindowSize';
 
 import { IProduct } from '../@types/custom';
 
-type ProductProps = Pick<IProduct, 'title' | 'images' | 'price'>;
+type ProductProps = Pick<IProduct, '_id' | 'title' | 'images' | 'price'>;
 
-const Product: React.FC<ProductProps> = ({ title, images, price }) => {
+const Product: React.FC<ProductProps> = ({ _id, title, images, price }) => {
   const [width] = useWindowSize();
   const imagesRef = React.useRef<HTMLDivElement>(null);
 
@@ -18,7 +18,7 @@ const Product: React.FC<ProductProps> = ({ title, images, price }) => {
 
   return (
     <Link
-      to="/catalog/5"
+      to={`/catalog/${_id}`}
       className="flex flex-col pt-[5px] pl-[5px] lg:p-4 text-center card-hover rounded-lg group overflow-hidden"
     >
       <div
@@ -30,7 +30,7 @@ const Product: React.FC<ProductProps> = ({ title, images, price }) => {
           alt=""
           className="object-cover absolute z-10 h-full w-full"
         />
-        {images.length > 2 && (
+        {images.length > 1 && (
           <img
             src={`/img/products/${images[1]}`}
             alt=""
