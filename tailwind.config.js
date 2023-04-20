@@ -5,7 +5,11 @@ export default {
     fontFamily: {
       sans: 'Montserrat',
     },
-    extend: {},
+    extend: {
+      transitionProperty: {
+        border: 'border',
+      },
+    },
   },
   plugins: [],
 };
