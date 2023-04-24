@@ -25,10 +25,12 @@ const Header: React.FC = () => {
   const headerRef = React.useRef<HTMLElement>(null);
   const [isActive, setActive] = React.useState<boolean>(false);
 
-  dispatch(setScroll(isActive));
-
   const handleMenuClick = () => setActive((prev) => !prev);
   const handleCloseMenu = () => setActive(false);
+
+  React.useEffect(() => {
+    dispatch(setScroll(isActive));
+  }, [isActive]);
 
   if (width < 1024)
     return (
