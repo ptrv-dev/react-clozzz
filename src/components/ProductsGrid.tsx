@@ -30,6 +30,7 @@ const ProductsGrid: React.FC<ProductsGridProps> = ({
       window.scrollTo(0, 0);
     } catch (error) {
       setProducts([]);
+      setLoading(true);
       console.error(error);
       alert('Product fetch error!');
     }

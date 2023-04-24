@@ -18,6 +18,7 @@ const BrandsSection: React.FC = () => {
       setLoading(false);
     } catch (error) {
       setBrands([]);
+      setLoading(true);
       console.error(error);
       alert('Fetch brands error!');
     }
