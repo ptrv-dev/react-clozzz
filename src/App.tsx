@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import { useAppSelector } from './store';
 import CatalogPage from './pages/CatalogPage';
+import ProductPage from './pages/ProductPage';
 
 const App: React.FC = () => {
   const { noScroll } = useAppSelector((state) => state.bodySlice);
@@ -21,6 +22,7 @@ const App: React.FC = () => {
         <Routes>
           <Route index element={<HomePage />} />
           <Route path="/catalog" element={<CatalogPage />} />
+          <Route path="/catalog/:id" element={<ProductPage />} />
         </Routes>
       </main>
       <Footer />
