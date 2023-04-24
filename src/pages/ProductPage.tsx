@@ -1,6 +1,6 @@
 import React from 'react';
 import { IBrand, IProduct } from '../@types/custom';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useAppDispatch } from '../store';
 import { setScroll } from '../store/slices/body.slice';
@@ -132,7 +132,7 @@ const ProductPage: React.FC = () => {
         </div>
         <div className="flex-1 flex flex-col gap-4">
           <div className="flex items-center gap-2 text-sm text-zinc-800 flex-wrap">
-            <span>Home</span>
+            <Link to="/">Home</Link>
             <svg
               width="14"
               height="14"
@@ -147,7 +147,7 @@ const ProductPage: React.FC = () => {
                 fill="currentColor"
               />
             </svg>
-            <span>{brand?.title}</span>
+            <Link to={`/catalog?brandId=${data?.brandId}`}>{brand?.title}</Link>
             <svg
               width="14"
               height="14"

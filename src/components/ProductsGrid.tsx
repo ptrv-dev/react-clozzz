@@ -11,6 +11,7 @@ interface ProductsGridProps {
   limit?: number;
   sortBy?: keyof IProduct;
   order?: 'asc' | 'desc';
+  brandId?: number;
 }
 
 const ProductsGrid: React.FC<ProductsGridProps> = ({
@@ -18,6 +19,7 @@ const ProductsGrid: React.FC<ProductsGridProps> = ({
   order = 'desc',
   page = 1,
   sortBy = 'createdAt',
+  brandId,
 }) => {
   const [products, setProducts] = React.useState<IProduct[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
@@ -25,7 +27,9 @@ const ProductsGrid: React.FC<ProductsGridProps> = ({
   const fetchProducts = async () => {
     try {
       const { data } = await axios.get<IProduct[]>(
-        `https://643e569dc72fda4a0bf388cf.mockapi.io/products?page=${page}&limit=${limit}&sortBy=${sortBy}&order=${order}`
+        `https://643e569dc72fda4a0bf388cf.mockapi.io/products?page=${page}&limit=${limit}&sortBy=${sortBy}&order=${order}${
+          brandId ? `&brandId=${brandId}` : ''
+        }`
       );
       setProducts(data);
       setLoading(false);
