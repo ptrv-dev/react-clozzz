@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IBrand } from '../@types/custom';
-import Brand from './Brand';
 import axios from 'axios';
+
+import Brand from './Brand';
 import BrandSkeleton from './BrandSkeleton';
+
+import { IBrand } from '../@types/custom';
 
 const BrandsSection: React.FC = () => {
   const [brands, setBrands] = React.useState<IBrand[]>([]);

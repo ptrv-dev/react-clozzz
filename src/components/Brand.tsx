@@ -1,16 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-interface BrandProps {
-  title: string;
-  image: string;
-  url: string;
-}
+import { IBrand } from '../@types/custom';
 
-const Brand: React.FC<BrandProps> = ({ image, title, url }) => {
+const Brand: React.FC<IBrand> = ({ _id, image, title, url }) => {
   return (
     <Link
-      to={`/brand/${url}`}
+      to={`/brand/${_id}`}
       className="p-4 rounded-lg card-hover flex flex-col items-center"
     >
       <img src={`/img/brands/${image}`} alt={title} />

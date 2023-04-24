@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { INews } from '../@types/custom';
 import News from './News';
+
+import { INews } from '../@types/custom';
 
 const LatestNews: React.FC = () => {
   const [news, setNews] = React.useState<INews[]>([

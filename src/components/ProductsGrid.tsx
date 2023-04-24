@@ -1,8 +1,10 @@
 import React from 'react';
-import { IProduct } from '../@types/custom';
 import axios from 'axios';
+
 import ProductSkeleton from './ProductSkeleton';
 import Product from './Product';
+
+import { IProduct } from '../@types/custom';
 
 interface ProductsGridProps {
   page?: number;
