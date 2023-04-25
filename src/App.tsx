@@ -1,19 +1,32 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import Header from './components/Header';
-import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
-import { useAppSelector } from './store';
+import CartPage from './pages/CartPage';
 import CatalogPage from './pages/CatalogPage';
 import ProductPage from './pages/ProductPage';
 
+import Header from './components/Header';
+import Footer from './components/Footer';
+
+import { useAppDispatch, useAppSelector } from './store';
+import { clearCart, setCart } from './store/slices/cart.slice';
+
 const App: React.FC = () => {
+  const dispatch = useAppDispatch();
   const { noScroll } = useAppSelector((state) => state.bodySlice);
+  const cart = useAppSelector((state) => state.cartSlice);
 
   React.useEffect(() => {
     document.body.classList[noScroll ? 'add' : 'remove']('overflow-hidden');
   }, [noScroll]);
+
+  React.useEffect(() => {
+    const LS = JSON.parse(localStorage.getItem('cart') || '[]');
+    if (LS && LS.length) {
+      dispatch(setCart(LS));
+    }
+  }, []);
 
   return (
     <>
@@ -23,6 +36,7 @@ const App: React.FC = () => {
           <Route index element={<HomePage />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:id" element={<ProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
       </main>
       <Footer />

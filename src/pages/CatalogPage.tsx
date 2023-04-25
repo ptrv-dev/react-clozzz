@@ -82,7 +82,7 @@ const CatalogPage: React.FC = () => {
             <select
               onChange={onSortChange}
               id="sort"
-              className="px-2 py-1 border-zinc-900 border-b outline-none focus:border-b-2"
+              className="px-2 py-1 border-zinc-900 border-b outline-none focus:border-b-2 bg-transparent"
             >
               {availableSort.map((sort, idx) => (
                 <option key={idx} value={idx}>

@@ -1,12 +1,16 @@
 import React from 'react';
-import { IBrand, IProduct } from '../@types/custom';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useAppDispatch } from '../store';
+
 import { setScroll } from '../store/slices/body.slice';
+import { increase } from '../store/slices/cart.slice';
+import { useAppDispatch } from '../store';
+
+import { IBrand, IProduct } from '../@types/custom';
 
 const ProductPage: React.FC = () => {
   const { id } = useParams();
+  const dispatch = useAppDispatch();
 
   const [data, setData] = React.useState<IProduct | null>(null);
   const [brand, setBrand] = React.useState<IBrand | null>(null);
@@ -50,11 +54,19 @@ const ProductPage: React.FC = () => {
 
   const handleBuy = () => {};
 
-  const handleAddToCart = () => {};
+  const handleAddToCart = () => {
+    if (!id) return;
+    if (data?.sizes?.length && size === 'default')
+      return alert('Please select the size!');
+
+    if (!data?.sizes?.length) {
+      dispatch(increase({ _id: id }));
+    } else {
+      dispatch(increase({ _id: id, size }));
+    }
+  };
 
   const hugeRef = React.useRef<HTMLDivElement>(null);
-
-  const dispatch = useAppDispatch();
 
   React.useEffect(() => {
     if (image === null) {
@@ -182,7 +194,7 @@ const ProductPage: React.FC = () => {
                 onChange={(e) => setSize(e.target.value)}
                 className="border-b border-zinc-900 px-4 py-2 bg-transparent"
               >
-                <option value="default" disabled>
+                <option value={'default'} disabled>
                   CHOOSE
                 </option>
                 {data.sizes.map((size, idx) => (

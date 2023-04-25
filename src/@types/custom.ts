@@ -1,12 +1,12 @@
 export interface IBrand {
-  _id: number;
+  _id: string;
   title: string;
   url: string;
   image: string;
 }
 
 export interface IProduct {
-  _id: number;
+  _id: string;
   brandId: number;
   images: string[];
   title: string;
