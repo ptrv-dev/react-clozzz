@@ -3,6 +3,7 @@
 ##### Technologies used:
 - React
 - TailWindCSS
+- Redux-Toolkit
 - TypeScript
 - Vite
 - Vercel
