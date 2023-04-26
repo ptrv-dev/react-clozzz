@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import { decrease, increase, remove } from '../store/slices/cart.slice';
 import { useAppDispatch, useAppSelector } from '../store';
 
 import { IProduct } from '../@types/custom';
-import { decrease, increase, remove } from '../store/slices/cart.slice';
 
 const CartPage: React.FC = () => {
   const dispatch = useAppDispatch();

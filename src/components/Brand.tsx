@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { IBrand } from '../@types/custom';
 
-const Brand: React.FC<IBrand> = ({ _id, image, title, url }) => {
+const Brand: React.FC<IBrand> = ({ _id, image, title }) => {
   return (
     <Link
       to={`/catalog?brandId=${_id}`}

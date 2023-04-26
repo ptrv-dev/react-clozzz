@@ -9,13 +9,12 @@ import ProductPage from './pages/ProductPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
+import { setCart } from './store/slices/cart.slice';
 import { useAppDispatch, useAppSelector } from './store';
-import { clearCart, setCart } from './store/slices/cart.slice';
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const { noScroll } = useAppSelector((state) => state.bodySlice);
-  const cart = useAppSelector((state) => state.cartSlice);
 
   React.useEffect(() => {
     document.body.classList[noScroll ? 'add' : 'remove']('overflow-hidden');

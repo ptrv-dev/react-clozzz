@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
+import axios from 'axios';
 
 import ProductsGrid from '../components/ProductsGrid';
 import Pagination from '../components/Pagination';
 
 import { IBrand, IProduct } from '../@types/custom';
-import axios from 'axios';
 
 interface ISort {
   sortBy: keyof IProduct;
